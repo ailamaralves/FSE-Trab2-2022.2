@@ -2,7 +2,7 @@ from utils.bme280 import *
 from utils.csv_reader import *
 from utils.pid import PID
 from src.uart import UART
-from src.pwm import PWM
+from src.gpio import PWM
 
 class Forno:
     COMANDOS_USUARIO = [0xA1, 0xA2, 0xA3, 0xA4, 0xA5]
