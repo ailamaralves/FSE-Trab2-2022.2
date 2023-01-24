@@ -61,7 +61,10 @@ class UART:
             print(data)
             if crc16_recebido == crc16_calculado:
                 # print('Mensagem recebida: {}'.format(buffer))
-                return data
+                if buffer[2] in [0xC1, 0xC2, 0xD6]:
+                    return float.from_bytes(data, "little")
+                else:
+                    return int.from_bytes(data, "little")
             else:
                 print('Mensagem recebida: {}'.format(buffer))
                 print('CRC16 invalido')
