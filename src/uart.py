@@ -52,13 +52,12 @@ class UART:
     def recebe(self):
         buffer = self.serial.read(9)
         buffer_tam = len(buffer)
-        print(buffer)
         print(buffer_tam)
         if buffer_tam == 9:
             data = buffer[3:7]
             crc16_recebido = buffer[7:9]
             crc16_calculado = calcula_CRC(buffer[0:7], 7).to_bytes(2, 'little')
-            print(data)
+            print(int.from_bytes(data, "little"))
             if crc16_recebido == crc16_calculado:
                 # print('Mensagem recebida: {}'.format(buffer))
                 if buffer[2] in [0xC1, 0xC2, 0xD6]:
