@@ -26,11 +26,10 @@ class Forno:
         self.uart.envia(8, self.temp_ambiente)
         print("Temperatura interna: {}".format(self.temp_interna))
         print("Temperatura de referencia: {}".format(self.temp_referencia))
-        print("Temperatura ambiente: {}".format(self.temp_ambiente))
+        print("Temperatura ambiente: {}".format(self.temp_ambiente, 2))
 
     def handleUserCmd(self, user_cmd):
         print(user_cmd)
-        print(self.COMANDOS_USUARIO[0])
         if user_cmd == self.COMANDOS_USUARIO[0]:
             self.ligado = 1
             self.uart.envia(5, self.ligado)  # On/Off
@@ -79,7 +78,7 @@ class Forno:
                 self.temp_referencia = ref_
         self.temp_interna = self.uart.envia(0, None)
         print("temp_interna: ", self.temp_interna)
-        controle = self.pid_controle(self.temp_referencia, self.temp_interna)
+        controle = self.pid.pid_controle(self.temp_referencia, self.temp_interna)
         print("pid: ", controle)
         intensity = int(controle)
         sinal_controle = self.pwm <= intensity
