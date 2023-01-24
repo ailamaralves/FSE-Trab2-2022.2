@@ -1,5 +1,6 @@
 import serial
 import time
+import struct
 
 from utils.crc16 import calcula_CRC
 
@@ -35,9 +36,11 @@ class UART:
     def envia(self, subcomando, dado):
         if dado == None:
             dado = []
-        print(dado)
+        if type(dado) == float:
+            dado = struct.pack("f", dado)  
         mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula 
         bmensagem = bytearray(mensagem) + bytearray(dado)
+        print(bmensagem)
         
         crc = calcula_CRC(bmensagem, len(bmensagem)).to_bytes(2, 'little')
         print(crc)
