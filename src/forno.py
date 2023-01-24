@@ -20,10 +20,10 @@ class Forno:
 
         self.temp_interna = self.uart.envia(0, None)
         self.temp_referencia = self.uart.envia(1, None)
-        self.uart.envia(6, self.ligado)
-        self.uart.envia(7, self.modo)
-        self.uart.envia(8, self.iniciar)
-        self.uart.envia(9, self.temp_ambiente)
+        self.uart.envia(5, self.ligado)
+        self.uart.envia(6, self.modo)
+        self.uart.envia(7, self.iniciar)
+        self.uart.envia(8, self.temp_ambiente)
         print("temp_interna {}".format(temp_interna))
         print("temp_referencia {}".format(temp_referencia))
         print("temp_ambiente {}".format(temp_ambiente))
@@ -33,29 +33,29 @@ class Forno:
     def handleUserCmd(self, user_cmd):
         if user_cmd == COMANDOS_USUARIO[0]:
             self.ligado = 1
-            self.uart.envia(6, self.ligado)  # On/Off
+            self.uart.envia(5, self.ligado)  # On/Off
         elif user_cmd == COMANDOS_USUARIO[1]:
             self.ligado = 0
-            self.uart.envia(6, self.ligado)  # On/Off
+            self.uart.envia(5, self.ligado)  # On/Off
         elif user_cmd == COMANDOS_USUARIO[2]:
             if self.ligado == 0:
                 return
             self.iniciar = 1
-            self.uart.envia(8, self.iniciar)   # Start/Stop
+            self.uart.envia(7, self.iniciar)   # Start/Stop
         elif user_cmd == COMANDOS_USUARIO[3]:
             self.iniciar = 0
-            self.uart.envia(8, self.iniciar)   # Start/Stop
+            self.uart.envia(7, self.iniciar)   # Start/Stop
             self.stopIt()
         elif user_cmd == COMANDOS_USUARIO[4]:
             self.modo = not self.modo
-            self.uart.envia(7, self.modo)   # Dashboard
+            self.uart.envia(6, self.modo)   # Dashboard
             self.tempo_curva = 0
         else:
             pass
         return
 
     def refreshCmd(self):
-        return self.uart.envia(3, None)
+        return self.uart.envia(2, None)
 
     def isPlaying(self):
         return self.iniciar
