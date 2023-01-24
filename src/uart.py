@@ -34,6 +34,7 @@ class UART:
         print('Porta desconectada')
 
     def envia(self, subcomando, dado):
+        print(dado)
         if dado == None:
             dado = []
         if type(dado) == float:
