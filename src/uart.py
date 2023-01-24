@@ -58,7 +58,7 @@ class UART:
             data = buffer[3:7]
             crc16_recebido = buffer[7:9]
             crc16_calculado = calcula_CRC(buffer[0:7], 7).to_bytes(2, 'little')
-
+            print(data)
             if crc16_recebido == crc16_calculado:
                 # print('Mensagem recebida: {}'.format(buffer))
                 return data
