@@ -41,7 +41,7 @@ class UART:
             dado = struct.pack("f", dado)
         elif 0xD1 == self.subComando[subcomando]:
             dado = dado.to_bytes(4, 'little')
-        if subcomando in [0xD3, 0xD4, 0xD5]:
+        if self.subComando[subcomando] in [0xD3, 0xD4, 0xD5]:
             dado = [dado]
             mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula + dado
             bmensagem = bytearray(mensagem)
