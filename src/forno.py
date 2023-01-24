@@ -24,29 +24,27 @@ class Forno:
         self.uart.envia(6, self.modo)
         self.uart.envia(7, self.iniciar)
         self.uart.envia(8, self.temp_ambiente)
-        print("temp_interna {}".format(temp_interna))
-        print("temp_referencia {}".format(temp_referencia))
-        print("temp_ambiente {}".format(temp_ambiente))
-
-        pid_atualiza_referencia(temp_referencia)
+        print("temp_interna {}".format(self.temp_interna))
+        print("temp_referencia {}".format(self.temp_referencia))
+        print("temp_ambiente {}".format(self.temp_ambiente))
 
     def handleUserCmd(self, user_cmd):
-        if user_cmd == COMANDOS_USUARIO[0]:
+        if user_cmd == self.COMANDOS_USUARIO[0]:
             self.ligado = 1
             self.uart.envia(5, self.ligado)  # On/Off
-        elif user_cmd == COMANDOS_USUARIO[1]:
+        elif user_cmd == self.COMANDOS_USUARIO[1]:
             self.ligado = 0
             self.uart.envia(5, self.ligado)  # On/Off
-        elif user_cmd == COMANDOS_USUARIO[2]:
+        elif user_cmd == self.COMANDOS_USUARIO[2]:
             if self.ligado == 0:
                 return
             self.iniciar = 1
             self.uart.envia(7, self.iniciar)   # Start/Stop
-        elif user_cmd == COMANDOS_USUARIO[3]:
+        elif user_cmd == self.COMANDOS_USUARIO[3]:
             self.iniciar = 0
             self.uart.envia(7, self.iniciar)   # Start/Stop
             self.stopIt()
-        elif user_cmd == COMANDOS_USUARIO[4]:
+        elif user_cmd == self.COMANDOS_USUARIO[4]:
             self.modo = not self.modo
             self.uart.envia(6, self.modo)   # Dashboard
             self.tempo_curva = 0
