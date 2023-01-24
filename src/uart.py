@@ -33,6 +33,9 @@ class UART:
         print('Porta desconectada')
 
     def envia(self, subcomando, dado:list):
+        print(self.matricula)
+        print(dado)
+        print([self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]])
         mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula + dado
         bmensagem = bytearray(mensagem)
         
