@@ -45,9 +45,10 @@ class UART:
         else:
             mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula 
             bmensagem = bytearray(mensagem) + bytearray(dado)
+        print(mensagem)
+        print(bmensagem)
         crc = calcula_CRC(bmensagem, len(bmensagem)).to_bytes(2, 'little')
         msg = bmensagem + crc
-        print(msg)
         self.serial.write(msg)
         time.sleep(0.3)
         res = self.recebe()
