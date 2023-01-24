@@ -1,4 +1,3 @@
-# PYTHON VERSION 1 trabalho antigo
 class PID:
     Kp = 30.0   # Ganho Proporcional
     Ki = 0.2    # Ganho Integral

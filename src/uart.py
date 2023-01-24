@@ -1,7 +1,3 @@
-#PYTHON VERSION
-
-
-
 import serial
 import time
 
@@ -11,6 +7,7 @@ class UART:
     conectado = False
     endereco = 1
     comando = [0x23, 0x16]
+    #               0     1     2     3     4     6     7    8     9
     subComando = [0xC1, 0xC2, 0xC3, 0xD1, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6]
     def __init__(self, matricula):
         self.matricula = matricula
@@ -44,10 +41,10 @@ class UART:
         self.serial.write(msg)
         time.sleep(0.1)
         res = self.recebe()
+        return res
         # print('Mensagem enviada: {}'.format(msg))
 
     def recebe(self):
-        time.sleep(0.2)
         buffer = self.serial.read(9)
         buffer_tam = len(buffer)
 

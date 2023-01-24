@@ -1,11 +1,10 @@
-# PYTHON VERSION
+class Row:
+    temp = []
+    time = []
 
-import csv_reader
-
-def read_record(row):
-    # File pointer
+def read_record():
     fin = open("../curva_reflow.csv", "r")
-
+    row = Row()
     a = [25, 38, 46, 54, 57, 61, 63, 54, 33, 25]
     if not fin.readable():
         for i in range(10):
@@ -13,7 +12,6 @@ def read_record(row):
             row.temp[i] = a[i]
         return
 
-    # Read the Data from the file
     count = 0
     for line in fin:
         if count == 0:
@@ -26,4 +24,5 @@ def read_record(row):
     if count == 1:
         print("Record not found")
     fin.close()
-    return
+    return row
+

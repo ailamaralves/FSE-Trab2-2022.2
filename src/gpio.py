@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 
-class GpioPWM:
+class PWM:
     resistPin = 23				        # PWM pin connected to LED
     fanPin = 24
     PWMRANGE = [40, 100]
