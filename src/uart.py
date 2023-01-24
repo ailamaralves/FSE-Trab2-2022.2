@@ -52,11 +52,10 @@ class UART:
         # print('Mensagem enviada: {}'.format(msg))
 
     def recebe(self):
-        time.sleep(0.2)
         buffer = self.serial.read(9)
         buffer_tam = len(buffer)
-        print(buffer)
         print("buffer")
+        print(buffer)
         if buffer_tam == 9:
             data = buffer[3:7]
             crc16_recebido = buffer[7:9]
@@ -83,5 +82,6 @@ class UART:
         else:
             print('Mensagem recebida: {}'.format(buffer))
             print('Mensagem no formato incorreto, tamanho: {}'.format(buffer_tam))
+            self.recebe()
             return None
 
