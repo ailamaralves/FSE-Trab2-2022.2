@@ -82,6 +82,5 @@ class UART:
         else:
             print('Mensagem recebida: {}'.format(buffer))
             print('Mensagem no formato incorreto, tamanho: {}'.format(buffer_tam))
-            self.recebe()
             return None
 
