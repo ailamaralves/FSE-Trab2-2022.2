@@ -37,11 +37,12 @@ class UART:
         print(dado)
         if dado == None:
             dado = []
-        if type(dado) == float:
+        elif type(dado) == float:
             dado = struct.pack("f", dado)
-        
+        elif dado <= 1:
+            dado = [dado]
         if subcomando in [0xD3, 0xD4, 0xD5]:
-            mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula + [dado]
+            mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula + dado
             bmensagem = bytearray(mensagem)
         else:
             mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula 
@@ -67,7 +68,7 @@ class UART:
             if crc16_recebido == crc16_calculado:
                 # print('Mensagem recebida: {}'.format(buffer))
                 if buffer[2] in [0xC1, 0xC2, 0xD6]:
-                    return struct.unpack('f', data)
+                    return struct.unpack('f', data)[0]
                 else:
                     return int.from_bytes(data, "little")
             else:
