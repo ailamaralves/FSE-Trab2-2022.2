@@ -37,7 +37,8 @@ class UART:
         if dado == None:
             dado = []
         if type(dado) == float:
-            dado = struct.pack("f", dado)  
+            dado = struct.pack("f", dado)
+        print(dado)  
         mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula 
         bmensagem = bytearray(mensagem) + bytearray(dado)
         crc = calcula_CRC(bmensagem, len(bmensagem)).to_bytes(2, 'little')

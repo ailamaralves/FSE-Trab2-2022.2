@@ -13,9 +13,9 @@ class Forno:
         self.pid = PID()
         self.temp_ambiente = calcula_temp_ambiente()
         
-        self.ligado = 0
-        self.modo = 0
-        self.iniciar = 0
+        self.ligado = 0x00
+        self.modo = 0x00
+        self.iniciar = 0x00
         self.curva = read_record()
 
         self.temp_interna = self.uart.envia(0, None)
@@ -26,23 +26,23 @@ class Forno:
         self.uart.envia(8, self.temp_ambiente)
         print("Temperatura interna: {}".format(self.temp_interna))
         print("Temperatura de referencia: {}".format(self.temp_referencia))
-        print("Temperatura ambiente: {}".format(self.temp_ambiente, 2))
+        print("Temperatura ambiente: {}".format(self.temp_ambiente))
 
     def handleUserCmd(self, user_cmd):
         print(user_cmd)
         if user_cmd == self.COMANDOS_USUARIO[0]:
-            self.ligado = 1
+            self.ligado = 0x01
             self.uart.envia(5, self.ligado)  # On/Off
         elif user_cmd == self.COMANDOS_USUARIO[1]:
-            self.ligado = 0
+            self.ligado = 0x00
             self.uart.envia(5, self.ligado)  # On/Off
         elif user_cmd == self.COMANDOS_USUARIO[2]:
-            if self.ligado == 0:
+            if self.ligado == 0x00:
                 return
-            self.iniciar = 1
+            self.iniciar = 0x01
             self.uart.envia(7, self.iniciar)   # Start/Stop
         elif user_cmd == self.COMANDOS_USUARIO[3]:
-            self.iniciar = 0
+            self.iniciar = 0x00
             self.uart.envia(7, self.iniciar)   # Start/Stop
             self.stopIt()
         elif user_cmd == self.COMANDOS_USUARIO[4]:
