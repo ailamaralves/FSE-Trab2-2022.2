@@ -29,6 +29,8 @@ class Forno:
         print("Temperatura ambiente: {}".format(self.temp_ambiente))
 
     def handleUserCmd(self, user_cmd):
+        print(user_cmd)
+        print(self.COMANDOS_USUARIO[0])
         if user_cmd == self.COMANDOS_USUARIO[0]:
             self.ligado = 1
             self.uart.envia(5, self.ligado)  # On/Off
