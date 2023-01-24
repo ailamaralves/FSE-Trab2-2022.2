@@ -2,17 +2,16 @@
 
 Trabalho 2 da Disciplina de Fundamentos de Sistemas Embarcados.
 
-## Como instalar
+## Como instalar e rodar
 
-1. Primeiramente clone o repositório na placa;
-2. ...
-
-
-## Como rodar
+Primeiramente clone o repositório na placa;
+```
+git clone https://github.com/ailamaralves/FSE-Trab2-2022.2
+```
 
 Apos conectar na RaspberryPi e entrar na pasta do projeto:
 
-1. Iniciar o forno:
-   ```
-   python3 main.py
-   ```
+Iniciar o forno:
+```
+python3 main.py
+```
