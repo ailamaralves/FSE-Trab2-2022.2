@@ -40,8 +40,8 @@ class UART:
             dado = struct.pack("f", dado)  
         mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula 
         bmensagem = bytearray(mensagem) + bytearray(dado)
+        print("bmensagem")
         print(bmensagem)
-        
         crc = calcula_CRC(bmensagem, len(bmensagem)).to_bytes(2, 'little')
         print(crc)
         msg = bmensagem + crc
@@ -55,7 +55,8 @@ class UART:
         time.sleep(0.2)
         buffer = self.serial.read(9)
         buffer_tam = len(buffer)
-
+        print(buffer)
+        print("buffer")
         if buffer_tam == 9:
             data = buffer[3:7]
             crc16_recebido = buffer[7:9]

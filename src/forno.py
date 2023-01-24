@@ -24,9 +24,9 @@ class Forno:
         self.uart.envia(6, self.modo)
         self.uart.envia(7, self.iniciar)
         self.uart.envia(8, self.temp_ambiente)
-        print("temp_interna {}".format(self.temp_interna))
-        print("temp_referencia {}".format(self.temp_referencia))
-        print("temp_ambiente {}".format(self.temp_ambiente))
+        print("Temperatura interna: {}".format(self.temp_interna))
+        print("Temperatura de referencia: {}".format(self.temp_referencia))
+        print("Temperatura ambiente: {}".format(self.temp_ambiente))
 
     def handleUserCmd(self, user_cmd):
         if user_cmd == self.COMANDOS_USUARIO[0]:
