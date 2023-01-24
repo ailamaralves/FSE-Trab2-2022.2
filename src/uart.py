@@ -46,7 +46,7 @@ class UART:
         print(crc)
         msg = bmensagem + crc
         self.serial.write(msg)
-        time.sleep(0.1)
+        time.sleep(0.3)
         res = self.recebe()
         return res
         # print('Mensagem enviada: {}'.format(msg))
