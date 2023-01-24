@@ -40,7 +40,7 @@ class UART:
         bmensagem = bytearray(mensagem) + bytearray(dado)
         
         crc = calcula_CRC(bmensagem, len(bmensagem)).to_bytes(2, 'little')
-        print("crc: " + crc)
+        print(crc)
         msg = bmensagem + crc
         self.serial.write(msg)
         time.sleep(0.1)
