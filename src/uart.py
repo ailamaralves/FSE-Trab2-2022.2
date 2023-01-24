@@ -32,12 +32,12 @@ class UART:
         self.conectado = False
         print('Porta desconectada')
 
-    def envia(self, subcomando, dado:list):
-        print(self.matricula)
+    def envia(self, subcomando, dado):
+        if dado == None:
+            dado = []
         print(dado)
-        print([self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]])
-        mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula + dado
-        bmensagem = bytearray(mensagem)
+        mensagem = [self.endereco , self.comando[int(subcomando >= 4)] , self.subComando[subcomando]] + self.matricula 
+        bmensagem = bytearray(mensagem) + bytearray(dado)
         
         crc = calcula_CRC(bmensagem, len(bmensagem)).to_bytes(2, 'little')
         print("crc: " + crc)
